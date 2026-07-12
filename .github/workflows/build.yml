@@ -1,0 +1,15 @@
+name: Build K29
+on: [push]
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Compile
+        run: |
+          clang++ -arch arm64 -dynamiclib k29.cpp -o k29.dylib -framework Foundation
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: k29-dylib
+          path: k29.dylib
