@@ -5,12 +5,12 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Derleme ve Paketleme
+      - name: Derle ve Paketle
         run: |
-          # Dosyayı her yerde ara ve derle
-          FILE=$(find . -name "k29.cpp" | head -n 1)
-          clang++ -arch arm64 -dynamiclib "$FILE" -o k29.dylib -framework Foundation
-      - name: Sonuc
+          # -x objective-c++ : Derleyiciye dosyanın Objective-C++ olduğunu belirtir
+          # -framework Foundation : Apple'ın temel kütüphanesini bağlar
+          clang++ -x objective-c++ -arch arm64 -dynamiclib k29.cpp -o k29.dylib -framework Foundation
+      - name: Yukle
         uses: actions/upload-artifact@v4
         with:
           name: k29-dylib
