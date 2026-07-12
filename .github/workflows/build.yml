@@ -4,12 +4,12 @@ jobs:
   build:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Compile
         run: |
           clang++ -arch arm64 -dynamiclib k29.cpp -o k29.dylib -framework Foundation
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: k29-dylib
           path: k29.dylib
