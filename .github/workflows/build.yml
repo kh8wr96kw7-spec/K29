@@ -5,13 +5,23 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Derle
+      - name: Neredeyim ben?
         run: |
-          clang++ -arch arm64 -dynamiclib ./k29.cpp -o ./k29.dylib -framework Foundation
+          echo "Su anki klasor:"
+          pwd
+          echo "Dosyalarim:"
+          ls -F
+      - name: Derleme Denemesi
+        run: |
+          if [ -f k29.cpp ]; then
+            echo "k29.cpp bulundu, derleniyor..."
+            clang++ -arch arm64 -dynamiclib k29.cpp -o k29.dylib -framework Foundation
+          else
+            echo "HATA: k29.cpp bulunamadi!"
+            exit 1
+          fi
       - name: Yukle
         uses: actions/upload-artifact@v4
         with:
           name: k29-dylib
-          path: ./k29.dylib
-
-
+          path: k29.dylib
