@@ -5,8 +5,6 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: List files
-        run: ls -R
       - name: Compile
         run: |
           clang++ -arch arm64 -dynamiclib k29.cpp -o k29.dylib -framework Foundation
