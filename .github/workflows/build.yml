@@ -5,17 +5,12 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Dosya sistemini tara ve derle
+      - name: Derleme ve Paketleme
         run: |
-          find . -name "k29.cpp"
-          FILE_PATH=$(find . -name "k29.cpp" | head -n 1)
-          if [ -z "$FILE_PATH" ]; then
-            echo "HATA: k29.cpp bulunamadi!"
-            exit 1
-          fi
-          echo "Dosya bulundu: $FILE_PATH"
-          clang++ -arch arm64 -dynamiclib "$FILE_PATH" -o k29.dylib -framework Foundation
-      - name: Yukle
+          # Dosyayı her yerde ara ve derle
+          FILE=$(find . -name "k29.cpp" | head -n 1)
+          clang++ -arch arm64 -dynamiclib "$FILE" -o k29.dylib -framework Foundation
+      - name: Sonuc
         uses: actions/upload-artifact@v4
         with:
           name: k29-dylib
